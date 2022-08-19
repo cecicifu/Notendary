@@ -49,6 +49,10 @@ const App = () => {
     initDB()
   }, [initDB])
 
+  useEffect(() => {
+    console.log(notes)
+  }, [notes])
+
   return (
     <SafeAreaView>
       <StatusBar />
