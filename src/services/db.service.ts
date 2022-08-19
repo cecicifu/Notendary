@@ -9,19 +9,11 @@ const TABLE_NAME = 'notes'
 
 enablePromise(true)
 
-export const getDBConnection = async () => {
-  try {
-    const db = await openDatabase({
-      name: 'notendary-data.db',
-      location: 'default',
-    })
-    console.log('Database connected')
-    return db
-  } catch (error) {
-    console.error(error)
-    throw Error("Error - Database can't connect")
-  }
-}
+export const getDBConnection = async () =>
+  openDatabase({
+    name: 'notendary-data.db',
+    location: 'default',
+  })
 
 export const createTable = async (db: SQLiteDatabase) => {
   const query = `CREATE TABLE IF NOT EXISTS ${TABLE_NAME}(
@@ -52,7 +44,7 @@ export const getNotes = async (db: SQLiteDatabase): Promise<Note[]> => {
     return Notes
   } catch (error) {
     console.error(error)
-    throw Error('Failed to get notes!')
+    throw new Error('Failed to get notes!')
   }
 }
 
