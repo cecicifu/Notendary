@@ -10,14 +10,23 @@ const TABLE_NAME = 'notes'
 enablePromise(true)
 
 export const getDBConnection = async () => {
-  return openDatabase({name: 'notendary-data.db', location: 'default'})
+  try {
+    const db = await openDatabase({
+      name: 'notendary-data.db',
+      location: 'default',
+    })
+    console.log('Database connected')
+    return db
+  } catch (error) {
+    console.error(error)
+    throw Error("Error - Database can't connect")
+  }
 }
 
 export const createTable = async (db: SQLiteDatabase) => {
-  // Create table if not exists
   const query = `CREATE TABLE IF NOT EXISTS ${TABLE_NAME}(
       title TEXT NOT NULL,
-      description TEXT ,
+      description TEXT,
       datetime DATETIME NOT NULL,
       createdAt DATETIME NOT NULL,
       updatedAt DATETIME
