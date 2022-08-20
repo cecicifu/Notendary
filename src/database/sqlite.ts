@@ -12,7 +12,7 @@ export const DBConnection = async () =>
     location: 'default',
   })
 
-export const executeSqltoGetAll = async <T>(
+export const executeToGetAll = async <T>(
   db: SQLiteDatabase,
   query: string,
 ) => {
@@ -34,7 +34,7 @@ export const executeSqltoGetAll = async <T>(
   }
 }
 
-export const executeSqltoGetOne = async <T>(
+export const executeToGetOne = async <T>(
   db: SQLiteDatabase,
   query: string,
 ) => {
