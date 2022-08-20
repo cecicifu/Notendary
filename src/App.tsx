@@ -9,37 +9,55 @@ import {
 import {Calendar} from 'react-native-calendars'
 import {Text, Avatar} from '@rneui/themed'
 import AddFloatingButton from './components/AddFloatingButton'
-import {
-  createTable,
-  getDBConnection,
-  getNotes,
-  saveNote,
-} from './services/db.service'
+import {createTable, getAllNotes, saveNotes} from './services/notes.service'
 import {Note} from './models/note.type'
 
 const App = () => {
-  const [notes, setNotes] = useState<Note[] | null>(null)
+  const [notes, setNotes] = useState<Note[]>()
 
   const initDB = useCallback(async () => {
     try {
       const initNotes: Note[] = [
         {
           id: 0,
-          title: 'first note',
+          title: '0 note',
+          description: 'the description',
+          datetime: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+        {
+          id: 1,
+          title: '1 note',
+          description: 'the description',
+          datetime: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+        {
+          id: 2,
+          title: '2 note',
+          description: 'the description',
+          datetime: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+        {
+          id: 3,
+          title: '3 note',
           description: 'the description',
           datetime: new Date().toISOString(),
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         },
       ]
-      const db = await getDBConnection()
-      await createTable(db)
-      const storeNotes = await getNotes(db)
+      await createTable()
+      const storeNotes = await getAllNotes()
 
       if (storeNotes.length) return setNotes(storeNotes)
 
-      await saveNote(db, initNotes)
-      setNotes(initNotes)
+      await saveNotes(initNotes)
+      setNotes(storeNotes)
     } catch (error) {
       console.error(error)
     }
