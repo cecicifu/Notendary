@@ -2,8 +2,8 @@ import {SQLiteDatabase} from 'react-native-sqlite-storage'
 import {
   DBConnection,
   executeSql,
-  executeToGetAll,
-  executeToGetOne,
+  executeSqltoGetAll,
+  executeSqltoGetOne,
 } from './sqlite'
 
 type SQLType = SQLiteDatabase
@@ -11,9 +11,9 @@ type SQLType = SQLiteDatabase
 export const getDBConnection = () => DBConnection()
 
 export const getAll = <T>(db: SQLType, query: string) =>
-  executeToGetAll<T>(db, query)
+  executeSqltoGetAll<T>(db, query)
 
 export const getById = <T>(db: SQLType, query: string) =>
-  executeToGetOne<T>(db, query)
+  executeSqltoGetOne<T>(db, query)
 
 export const execute = (db: SQLType, query: string) => executeSql(db, query)
