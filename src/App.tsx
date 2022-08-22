@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {
   SafeAreaView,
   ScrollView,
@@ -9,61 +9,82 @@ import {
 import {Calendar} from 'react-native-calendars'
 import {Text, Avatar} from '@rneui/themed'
 import AddFloatingButton from './components/AddFloatingButton'
+import {createTable, getAllNotes} from './services/notes.service'
+import {Note} from './models/note.type'
 
-const App = () => (
-  <SafeAreaView>
-    <StatusBar />
-    <ScrollView
-      contentContainerStyle={{height: '100%'}}
-      contentInsetAdjustmentBehavior="automatic">
-      <View style={styles.defaultView}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: 10,
-          }}>
-          <Text style={{fontSize: 45, marginLeft: 10}}>Notendary</Text>
-          <Avatar
-            size="medium"
-            rounded
-            title="CC"
-            onPress={() => console.log('Profile')}
-            containerStyle={{marginRight: 10, backgroundColor: '#83AF9B'}}
+const App = () => {
+  const [notes, setNotes] = useState<Note[] | null>(null)
+
+  const initDB = useCallback(async () => {
+    await createTable()
+    const storeNotes = await getAllNotes()
+
+    if (storeNotes.length) return setNotes(storeNotes)
+  }, [])
+
+  useEffect(() => {
+    initDB()
+  }, [initDB])
+
+  useEffect(() => {
+    console.log(notes)
+  }, [notes])
+
+  return (
+    <SafeAreaView>
+      <StatusBar />
+      <ScrollView
+        contentContainerStyle={{height: '100%'}}
+        contentInsetAdjustmentBehavior="automatic">
+        <View style={styles.defaultView}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginTop: 10,
+            }}>
+            <Text style={{fontSize: 45, marginLeft: 10}}>Notendary</Text>
+            <Avatar
+              size="medium"
+              rounded
+              title="CC"
+              onPress={() => console.log('Profile')}
+              containerStyle={{marginRight: 10, backgroundColor: '#83AF9B'}}
+            />
+          </View>
+
+          <Calendar
+            theme={{
+              calendarBackground: '#ffffff',
+              todayTextColor: '#FE4365',
+              arrowColor: '#FE4365',
+            }}
+            onDayPress={day => {
+              console.log('selected day', day)
+            }}
+            monthFormat={'MMMM - yyyy'}
+            onMonthChange={month => {
+              console.log('month changed', month)
+            }}
+            firstDay={1}
+            onPressArrowLeft={subtractMonth => subtractMonth()}
+            onPressArrowRight={addMonth => addMonth()}
+            disableAllTouchEventsForDisabledDays={true}
+            enableSwipeMonths={true}
+          />
+          <Text style={styles.infoText}>
+            You can add new events clicking on a day or using the "+" button
+          </Text>
+          <AddFloatingButton
+            eventAction={() => console.log('Add event')}
+            categoryAction={() => console.log('Add event')}
           />
         </View>
-
-        <Calendar
-          theme={{
-            calendarBackground: '#ffffff',
-            todayTextColor: '#FE4365',
-            arrowColor: '#FE4365',
-          }}
-          onDayPress={day => {
-            console.log('selected day', day)
-          }}
-          monthFormat={'MMMM - yyyy'}
-          onMonthChange={month => {
-            console.log('month changed', month)
-          }}
-          firstDay={1}
-          onPressArrowLeft={subtractMonth => subtractMonth()}
-          onPressArrowRight={addMonth => addMonth()}
-          disableAllTouchEventsForDisabledDays={true}
-          enableSwipeMonths={true}
-        />
-        <Text style={styles.infoText}>
-          You can add new events clicking on a day or using the "+" button
-        </Text>
-        <AddFloatingButton
-          eventAction={() => console.log('Add event')}
-          categoryAction={() => console.log('Add event')}
-        />
-      </View>
-    </ScrollView>
-  </SafeAreaView>
-)
+      </ScrollView>
+    </SafeAreaView>
+  )
+}
 
 const styles = StyleSheet.create({
   defaultView: {

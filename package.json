@@ -14,7 +14,8 @@
     "@rneui/themed": "^4.0.0-rc.6",
     "react": "18.0.0",
     "react-native": "0.69.3",
-    "react-native-calendars": "^1.1286.0",
+    "react-native-calendars": "^1.1275.0",
+    "react-native-sqlite-storage": "^6.0.1",
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.69.3",
+    "@types/react-native-sqlite-storage": "^5.0.2",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
