@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
 import {SpeedDial} from '@rneui/themed'
+import {useFocusEffect} from '@react-navigation/native'
+import React, {useCallback, useState} from 'react'
 
 interface AddFloatingButtonProps {
   eventAction: () => void
@@ -11,6 +12,12 @@ const AddFloatingButton = ({
   categoryAction,
 }: AddFloatingButtonProps) => {
   const [open, setOpen] = useState(false)
+
+  useFocusEffect(
+    useCallback(() => {
+      setOpen(false)
+    }, []),
+  )
 
   return (
     <SpeedDial
