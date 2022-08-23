@@ -4,8 +4,8 @@ import {styles} from '../styles/global'
 import {View} from 'react-native'
 import AddFloatingButton from '../components/AddFloatingButton'
 import React from 'react'
-import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import type { RoutesStackParamList } from '../App'
+import type {NativeStackScreenProps} from '@react-navigation/native-stack'
+import type {RoutesStackParamList} from '../navigation/AppNavigation'
 
 const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
   return (
@@ -50,7 +50,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
         You can add new events clicking on a day or using the "+" button
       </Text>
       <AddFloatingButton
-        eventAction={() => navigation.navigate("NoteForm")}
+        eventAction={() => navigation.navigate('NoteForm')}
         categoryAction={() => console.log('Add event')}
       />
     </View>

@@ -3,7 +3,7 @@ import {Text, Button} from '@rneui/themed'
 import {View} from 'react-native'
 import React from 'react'
 import type {NativeStackScreenProps} from '@react-navigation/native-stack'
-import type {RoutesStackParamList} from '../App'
+import type {RoutesStackParamList} from '../navigation/AppNavigation'
 
 const NoteForm = ({
   navigation,
