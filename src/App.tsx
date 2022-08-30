@@ -1,5 +1,5 @@
 import {createTable, getAllNotes} from './services/notes.service'
-import {Note} from './models/note.type'
+import {Note} from './models/Note'
 import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import AppNavigation from './navigation/AppNavigation'
 import React, {useCallback, useEffect, useState} from 'react'

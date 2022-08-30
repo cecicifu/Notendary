@@ -1,4 +1,4 @@
-import type {Note} from '../models/note.type'
+import {Note} from '../models/Note'
 import {execute, getAll, getById, getDBConnection} from '../database/base'
 
 const TABLE_NAME = 'notes'
