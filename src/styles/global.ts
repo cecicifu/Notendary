@@ -13,4 +13,13 @@ export const styles = StyleSheet.create({
     display: 'flex',
     alignSelf: 'center',
   },
+  buttonsInline: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  button: {
+    width: 50,
+    marginRight: 20
+  }
 })
