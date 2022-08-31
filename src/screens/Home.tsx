@@ -17,7 +17,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
           justifyContent: 'space-between',
           marginTop: 10,
         }}>
-        <Text style={{fontSize: 45, marginLeft: 10}}>Notendary</Text>
+        <Text h1 h1Style={{fontFamily: 'sans-serif-thin'}} style={{marginLeft: 10}}>Notendary</Text>
         <Avatar
           size="medium"
           rounded
@@ -41,17 +41,18 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
           console.log('month changed', month)
         }}
         firstDay={1}
+        hideExtraDays
         onPressArrowLeft={subtractMonth => subtractMonth()}
         onPressArrowRight={addMonth => addMonth()}
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
       />
       <Text style={styles.infoText}>
-        You can add new events clicking on a day or using the "+" button
+        You can add notes clicking on a day or using the + button
       </Text>
       <AddFloatingButton
-        eventAction={() => navigation.navigate('NoteForm')}
-        categoryAction={() => console.log('Add event')}
+        noteAction={() => navigation.navigate('NoteForm')}
+        categoryAction={() => console.log('Add category')}
       />
     </View>
   )
