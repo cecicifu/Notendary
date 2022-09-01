@@ -12,12 +12,7 @@ const NoteForm = ({
   const [dateInput, setDateInput] = useState('')
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
 
-  const titleRef = createRef<TextInput>()
   const dateRef = createRef<TextInput>()
-
-  useEffect(() => {
-    titleRef.current?.focus()
-  }, [])
 
   const showDatePicker = () => {
     dateRef.current?.blur()
@@ -47,7 +42,7 @@ const NoteForm = ({
         style={{marginTop: 10, textAlign: 'center'}}>
         New note
       </Text>
-      <Input ref={titleRef} placeholder="Title" />
+      <Input placeholder="Title" />
       <Input numberOfLines={2} multiline placeholder="Description" />
       <Input
         ref={dateRef}
