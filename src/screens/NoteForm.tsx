@@ -33,7 +33,7 @@ const NoteForm = ({
   }
 
   const handleSave = async () => {
-    if (!titleInput || dateInput) return
+    if (!titleInput || !dateInput) return
 
     const note: Note = {
       title: titleInput,
