@@ -32,7 +32,9 @@ const NoteForm = ({
     hideDatePicker()
   }
 
-  const asd = async () => {
+  const handleSave = async () => {
+    if (!titleInput || dateInput) return
+
     const note: Note = {
       title: titleInput,
       description: descriptionInput,
@@ -76,7 +78,7 @@ const NoteForm = ({
           title="Save"
           color="#83AF9B"
           size="lg"
-          onPress={() => asd()}
+          onPress={() => handleSave()}
         />
         <Button
           icon={{name: 'chevron-left', color: '#fff'}}
