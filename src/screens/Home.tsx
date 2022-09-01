@@ -1,7 +1,7 @@
+import {CalendarMark, notesToCalendarMark} from '../mappers/noteMapper'
 import {Avatar, Text} from '@rneui/themed'
 import {Calendar} from 'react-native-calendars'
 import {getAllNotes} from '../services/notes.service'
-import {MarkingProps} from 'react-native-calendars/src/calendar/day/marking'
 import {styles} from '../styles/global'
 import {useFocusEffect} from '@react-navigation/native'
 import {View} from 'react-native'
@@ -10,29 +10,13 @@ import React, {useCallback, useState} from 'react'
 import type {NativeStackScreenProps} from '@react-navigation/native-stack'
 import type {RoutesStackParamList} from '../navigation/AppNavigation'
 
-type NoteMap = {
-  [key: string]: MarkingProps
-}
-
 const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
-  const [notes, setNotes] = useState<NoteMap | null>(null)
+  const [notes, setNotes] = useState<CalendarMark | null>(null)
 
   useFocusEffect(
     useCallback(() => {
       getAllNotes().then(notes => {
-        if (notes.length) {
-          const noteMap: NoteMap = {}
-          notes.forEach(note => {
-            noteMap[note.datetime.split('T')[0]] = {
-              dots: [
-                {
-                  color: 'black',
-                },
-              ],
-            }
-          })
-          setNotes(noteMap)
-        }
+        if (notes.length) setNotes(notesToCalendarMark(notes))
       })
     }, []),
   )
@@ -63,7 +47,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
 
       <Calendar
         markingType="multi-dot"
-        markedDates={notes as NoteMap}
+        markedDates={notes as CalendarMark}
         theme={{
           calendarBackground: '#ffffff',
           todayTextColor: '#FE4365',
