@@ -1,14 +1,18 @@
+import {Note} from '../models/Note'
+import {saveNote} from '../services/notes.service'
 import {styles} from '../styles/global'
 import {Text, Button, Input} from '@rneui/themed'
 import {TextInput, View} from 'react-native'
-import React, {createRef, useEffect, useState} from 'react'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import React, {createRef, useState} from 'react'
 import type {NativeStackScreenProps} from '@react-navigation/native-stack'
 import type {RoutesStackParamList} from '../navigation/AppNavigation'
 
 const NoteForm = ({
   navigation,
 }: NativeStackScreenProps<RoutesStackParamList>) => {
+  const [titleInput, setTitleInput] = useState('')
+  const [descriptionInput, setDescriptionInput] = useState('')
   const [dateInput, setDateInput] = useState('')
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
 
@@ -28,8 +32,16 @@ const NoteForm = ({
     hideDatePicker()
   }
 
-  const saveNote = () => {
-    // save stuffs
+  const asd = async () => {
+    const note: Note = {
+      title: titleInput,
+      description: descriptionInput,
+      datetime: new Date(dateInput).toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
+
+    await saveNote(note)
 
     return navigation.goBack()
   }
@@ -42,8 +54,13 @@ const NoteForm = ({
         style={{marginTop: 10, textAlign: 'center'}}>
         New note
       </Text>
-      <Input placeholder="Title" />
-      <Input numberOfLines={2} multiline placeholder="Description" />
+      <Input onChangeText={value => setTitleInput(value)} placeholder="Title" />
+      <Input
+        onChangeText={value => setDescriptionInput(value)}
+        numberOfLines={2}
+        multiline
+        placeholder="Description"
+      />
       <Input
         ref={dateRef}
         onFocus={() => showDatePicker()}
@@ -59,7 +76,7 @@ const NoteForm = ({
           title="Save"
           color="#83AF9B"
           size="lg"
-          onPress={() => saveNote()}
+          onPress={() => asd()}
         />
         <Button
           icon={{name: 'chevron-left', color: '#fff'}}

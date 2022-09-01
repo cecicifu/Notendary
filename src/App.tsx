@@ -1,22 +1,16 @@
-import {createTable, getAllNotes} from './services/notes.service'
-import {Note} from './models/Note'
+import {createTable} from './services/notes.service'
 import {SafeAreaView, ScrollView, StatusBar} from 'react-native'
 import AppNavigation from './navigation/AppNavigation'
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect} from 'react'
 
 const App = () => {
-  const [notes, setNotes] = useState<Note[] | null>(null)
+  useEffect(() => {
+    initDB()
+  }, [])
 
   const initDB = useCallback(async () => {
     await createTable()
-    const storeNotes = await getAllNotes()
-
-    if (storeNotes.length) return setNotes(storeNotes)
   }, [])
-
-  useEffect(() => {
-    initDB()
-  }, [initDB])
 
   return (
     <SafeAreaView>
