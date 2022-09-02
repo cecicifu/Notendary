@@ -41,16 +41,18 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
     setNotesFromSelectedDay(notes)
   }
 
-  const deleteNoteHandler = async (note: Note) => {
-    await deleteNote(note.id)
+  const deleteNoteHandler = async (noteId: number) => {
+    deleteNote(noteId)
 
-    const newNotes = notesFromSelectedDay?.filter(
-      noteFromSelectedDay => noteFromSelectedDay.id !== note.id,
+    const newNotesFromSelectedDay = notesFromSelectedDay?.filter(
+      noteFromSelectedDay => noteFromSelectedDay.id !== noteId,
     )
 
+    setNotes(null)
     getAllNotesHandler()
 
-    if (newNotes?.length) return setNotesFromSelectedDay(newNotes)
+    if (newNotesFromSelectedDay?.length)
+      return setNotesFromSelectedDay(newNotesFromSelectedDay)
 
     setModalVisible(false)
   }
@@ -141,7 +143,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                       type="outline"
                       titleStyle={{color: 'red'}}
                       buttonStyle={{borderColor: 'red'}}
-                      onPress={() => deleteNoteHandler(note)}>
+                      onPress={() => deleteNoteHandler(note.id)}>
                       Delete
                     </Button>
                   </View>
