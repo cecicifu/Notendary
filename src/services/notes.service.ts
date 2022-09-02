@@ -25,6 +25,14 @@ export const getAllNotes = async () => {
   return getAll<Note>(db, query)
 }
 
+export const getAllNotesByDate = async (noteDate: string) => {
+  const db = await getDBConnection()
+
+  const query = `SELECT rowid as id, title, description, datetime, createdAt, updatedAt FROM ${TABLE_NAME} WHERE datetime LIKE '%${noteDate}%'`
+
+  return getAll<Note>(db, query)
+}
+
 export const getNoteById = async (noteId: number) => {
   const db = await getDBConnection()
 
@@ -48,7 +56,7 @@ export const saveNotes = async (notes: Note[]) => {
   await execute(db, query)
 }
 
-export const saveNote = async (note: Note) => {
+export const saveNote = async (note: Omit<Note, 'id'>) => {
   const db = await getDBConnection()
 
   const query = `INSERT OR REPLACE INTO ${TABLE_NAME} (title, description, datetime, createdAt, updatedAt) VALUES ('${note.title}', '${note.description}', '${note.datetime}', '${note.createdAt}', '${note.updatedAt}')`
