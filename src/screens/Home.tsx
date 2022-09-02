@@ -111,7 +111,8 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
       <Dialog
         ModalComponent={Modal}
         isVisible={modalVisible}
-        onPressOut={() => setModalVisible(false)}>
+        onPressOut={() => setModalVisible(false)}
+        onBackdropPress={() => setModalVisible(false)}>
         {notesFromSelectedDay && (
           <>
             <View style={{marginBottom: 16}}>
