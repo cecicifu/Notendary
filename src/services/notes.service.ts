@@ -37,13 +37,21 @@ export const saveNotes = async (notes: Note[]) => {
   const db = await getDBConnection()
 
   const query =
-    `INSERT OR REPLACE INTO ${TABLE_NAME}(rowid, title, description, datetime, createdAt, updatedAt) VALUES` +
+    `INSERT OR REPLACE INTO ${TABLE_NAME} (title, description, datetime, createdAt, updatedAt) VALUES` +
     notes
       .map(
         note =>
-          `(${note.id}, '${note.title}', '${note.description}', '${note.datetime}', '${note.createdAt}', '${note.updatedAt}')`,
+          `('${note.title}', '${note.description}', '${note.datetime}', '${note.createdAt}', '${note.updatedAt}')`,
       )
       .join(',')
+
+  await execute(db, query)
+}
+
+export const saveNote = async (note: Note) => {
+  const db = await getDBConnection()
+
+  const query = `INSERT OR REPLACE INTO ${TABLE_NAME} (title, description, datetime, createdAt, updatedAt) VALUES ('${note.title}', '${note.description}', '${note.datetime}', '${note.createdAt}', '${note.updatedAt}')`
 
   await execute(db, query)
 }

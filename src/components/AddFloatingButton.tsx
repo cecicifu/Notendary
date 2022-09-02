@@ -3,12 +3,12 @@ import {useFocusEffect} from '@react-navigation/native'
 import React, {useCallback, useState} from 'react'
 
 interface AddFloatingButtonProps {
-  eventAction: () => void
+  noteAction: () => void
   categoryAction: () => void
 }
 
 const AddFloatingButton = ({
-  eventAction,
+  noteAction: eventAction,
   categoryAction,
 }: AddFloatingButtonProps) => {
   const [open, setOpen] = useState(false)
@@ -30,13 +30,13 @@ const AddFloatingButton = ({
       <SpeedDial.Action
         icon={{name: 'add', color: '#fff'}}
         iconContainerStyle={{backgroundColor: '#FE4365'}}
-        title="Add event"
+        title="Note"
         onPress={eventAction}
       />
       <SpeedDial.Action
         icon={{name: 'add', color: '#fff'}}
         iconContainerStyle={{backgroundColor: '#FE4365'}}
-        title="Add category"
+        title="Category"
         onPress={categoryAction}
       />
     </SpeedDial>
