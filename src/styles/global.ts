@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     marginTop: 30,
-    width: 300,
+    width: 350,
     display: 'flex',
     alignSelf: 'center',
   },

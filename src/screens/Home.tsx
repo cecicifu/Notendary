@@ -102,7 +102,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
         enableSwipeMonths={true}
       />
       <Text style={styles.infoText}>
-        You can add notes clicking on a day or using the + button
+        You can add notes using the + button
       </Text>
       <AddFloatingButton
         noteAction={() => navigation.navigate('NoteForm')}
