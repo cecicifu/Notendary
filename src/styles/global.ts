@@ -17,9 +17,6 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    marginTop: 24
   },
-  button: {
-    width: 50,
-    marginRight: 20
-  }
 })
