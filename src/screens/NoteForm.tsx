@@ -98,7 +98,7 @@ const NoteForm = ({
         <Button
           icon={{name: 'save', color: '#fff'}}
           title="Save"
-          color="#83AF9B"
+          color="#72B896"
           size="lg"
           onPress={() => handleSave()}
         />

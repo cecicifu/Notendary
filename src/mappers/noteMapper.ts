@@ -12,7 +12,7 @@ export const notesToCalendarMark = (notes: Note[]) => {
     noteMap[note.datetime.split('T')[0]] = {
       dots: [
         {
-          color: '#F9CDAD',
+          color: '#FE4365',
         },
       ],
     }

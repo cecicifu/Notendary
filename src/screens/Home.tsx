@@ -76,7 +76,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
           rounded
           title="CC"
           onPress={() => console.log('Profile')}
-          containerStyle={{marginRight: 10, backgroundColor: '#83AF9B'}}
+          containerStyle={{marginRight: 10, backgroundColor: '#DEB99D'}}
         />
       </View>
 
@@ -87,6 +87,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
           calendarBackground: '#ffffff',
           todayTextColor: '#FE4365',
           arrowColor: '#FE4365',
+          dotStyle: { width: 20, height: 2 }
         }}
         onDayPress={day => selectedDayHandler(day)}
         monthFormat={'MMMM - yyyy'}
@@ -100,7 +101,6 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
       />
-      <Text style={styles.infoText}>You can add notes using the + button</Text>
       <AddFloatingButton
         noteAction={() => navigation.navigate('NoteForm')}
         categoryAction={() => console.log('Add category')}
@@ -129,7 +129,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>
-                    <View style={{display: 'flex', flexDirection: 'row'}}>
+                    <View style={{display: 'flex', flexDirection: 'row', alignItems: "center"}}>
                       <Text style={{fontWeight: 'bold'}}>
                         {`${new Date(note.datetime).getHours()}:${new Date(
                           note.datetime,
@@ -140,14 +140,12 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                     </View>
                     <Button
                       size="sm"
-                      type="outline"
-                      titleStyle={{color: 'red'}}
-                      buttonStyle={{borderColor: 'red'}}
+                      buttonStyle={{backgroundColor: '#FE4365'}}
                       onPress={() => deleteNoteHandler(note.id)}>
                       Delete
                     </Button>
                   </View>
-                  <Text>{note.description}</Text>
+                  {note.description && <Text>{note.description}</Text>}
                 </View>
               )
             })}
