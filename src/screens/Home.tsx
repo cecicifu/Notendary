@@ -131,7 +131,9 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                     }}>
                     <View style={{display: 'flex', flexDirection: 'row'}}>
                       <Text style={{fontWeight: 'bold'}}>
-                        {new Date(note.datetime).toLocaleTimeString()}
+                        {`${new Date(note.datetime).getHours()}:${new Date(
+                          note.datetime,
+                        ).getMinutes()}`}
                       </Text>
                       <Text style={{marginHorizontal: 8}}>|</Text>
                       <Text>{note.title}</Text>
