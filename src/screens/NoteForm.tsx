@@ -88,7 +88,11 @@ const NoteForm = ({
         onFocus={() => showDatePicker()}
         value={form.date}
         showSoftInputOnFocus={false}
-        rightIcon={{name: 'calendar-today', color: '#000'}}
+        rightIcon={{
+          name: 'calendar-today',
+          color: '#000',
+          onPress: () => setDatePickerVisibility(true),
+        }}
       />
       <View style={styles.buttonsInline}>
         <Button
