@@ -30,7 +30,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
 
   const getAllNotesHandler = async () => {
     const allNotes = await getAllNotes()
-    if (allNotes.length) setNotes(notesToCalendarMark(allNotes))
+    setNotes(notesToCalendarMark(allNotes))
   }
 
   const selectedDayHandler = async (day: DateData) => {
@@ -48,7 +48,6 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
       noteFromSelectedDay => noteFromSelectedDay.id !== noteId,
     )
 
-    setNotes(null)
     getAllNotesHandler()
 
     if (newNotesFromSelectedDay?.length)
@@ -101,9 +100,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
       />
-      <Text style={styles.infoText}>
-        You can add notes using the + button
-      </Text>
+      <Text style={styles.infoText}>You can add notes using the + button</Text>
       <AddFloatingButton
         noteAction={() => navigation.navigate('NoteForm')}
         categoryAction={() => console.log('Add category')}
