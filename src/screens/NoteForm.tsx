@@ -49,7 +49,7 @@ const NoteForm = ({
   const handleSave = async () => {
     if (!form.title || !form.date) return setError(FIELD_ERRORS.FIELD_MANDATORY)
 
-    const note: Omit<Note, 'id'> = {
+    const note = {
       title: form.title,
       description: form.description,
       datetime: new Date(form.date).toISOString(),
