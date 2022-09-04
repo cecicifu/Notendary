@@ -8,7 +8,7 @@ import {
 } from '../services/notes.service'
 import {Modal, View} from 'react-native'
 import {Note} from '../models/Note'
-import {styles} from '../styles/global'
+import {globalStyles} from '../styles/global'
 import {useFocusEffect} from '@react-navigation/native'
 import AddFloatingButton from '../components/AddFloatingButton'
 import React, {useCallback, useState} from 'react'
@@ -57,7 +57,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
   }
 
   return (
-    <View style={styles.defaultView}>
+    <View style={globalStyles.defaultView}>
       <View
         style={{
           display: 'flex',
@@ -87,7 +87,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
           calendarBackground: '#ffffff',
           todayTextColor: '#FE4365',
           arrowColor: '#FE4365',
-          dotStyle: { width: 20, height: 2 }
+          dotStyle: {width: 20, height: 2},
         }}
         onDayPress={day => selectedDayHandler(day)}
         monthFormat={'MMMM - yyyy'}
@@ -129,7 +129,12 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>
-                    <View style={{display: 'flex', flexDirection: 'row', alignItems: "center"}}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
                       <Text style={{fontWeight: 'bold'}}>
                         {`${new Date(note.datetime).getHours()}:${new Date(
                           note.datetime,

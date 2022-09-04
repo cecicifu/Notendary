@@ -1,9 +1,8 @@
 import {FIELD_ERRORS} from '../utils/constants'
-import {Note} from '../models/Note'
 import {saveNote} from '../services/notes.service'
-import {styles} from '../styles/global'
+import {globalStyles} from '../styles/global'
 import {Text, Button, Input} from '@rneui/themed'
-import {TextInput, View} from 'react-native'
+import {StyleSheet, TextInput, View} from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import React, {createRef, useState} from 'react'
 import type {NativeStackScreenProps} from '@react-navigation/native-stack'
@@ -63,7 +62,7 @@ const NoteForm = ({
   }
 
   return (
-    <View style={styles.defaultView}>
+    <View style={globalStyles.defaultView}>
       <Text
         h3
         h3Style={{fontFamily: 'sans-serif-thin'}}
@@ -120,5 +119,14 @@ const NoteForm = ({
     </View>
   )
 }
+
+export const styles = StyleSheet.create({
+  buttonsInline: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 24,
+  },
+})
 
 export default NoteForm
