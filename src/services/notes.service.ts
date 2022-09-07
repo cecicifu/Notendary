@@ -64,10 +64,18 @@ export const saveNote = async (note: Omit<Note, 'id'>) => {
   await execute(db, query)
 }
 
-export const deleteNote = async (id: number) => {
+export const deleteNoteById = async (id: number) => {
   const db = await getDBConnection()
 
   const query = `DELETE from ${TABLE_NAME} WHERE rowid = ${id}`
+
+  await execute(db, query)
+}
+
+export const deleteAllNotes = async () => {
+  const db = await getDBConnection()
+
+  const query = `DELETE from ${TABLE_NAME}`
 
   await execute(db, query)
 }
