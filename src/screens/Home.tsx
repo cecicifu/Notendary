@@ -2,13 +2,14 @@ import {Avatar, Text, Dialog, Button, Divider} from '@rneui/themed'
 import {Calendar, DateData} from 'react-native-calendars'
 import {CalendarMark, notesToCalendarMark} from '../mappers/noteMapper'
 import {
-  deleteNote,
+  deleteNoteById,
   getAllNotes,
   getAllNotesByDate,
 } from '../services/notes.service'
+import {formatTimeForHumans} from '../utils/helpers'
+import {globalStyles} from '../styles/global'
 import {Modal, View} from 'react-native'
 import {Note} from '../models/Note'
-import {globalStyles} from '../styles/global'
 import {useFocusEffect} from '@react-navigation/native'
 import AddFloatingButton from '../components/AddFloatingButton'
 import React, {useCallback, useState} from 'react'
@@ -41,8 +42,8 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
     setNotesFromSelectedDay(notes)
   }
 
-  const deleteNoteHandler = async (noteId: number) => {
-    deleteNote(noteId)
+  const deleteNoteHandler = async (noteId: Note['id']) => {
+    deleteNoteById(noteId)
 
     const newNotesFromSelectedDay = notesFromSelectedDay?.filter(
       noteFromSelectedDay => noteFromSelectedDay.id !== noteId,
@@ -136,9 +137,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                         alignItems: 'center',
                       }}>
                       <Text style={{fontWeight: 'bold'}}>
-                        {`${new Date(note.datetime).getHours()}:${new Date(
-                          note.datetime,
-                        ).getMinutes()}`}
+                        {formatTimeForHumans(note.datetime)}
                       </Text>
                       <Text style={{marginHorizontal: 8}}>|</Text>
                       <Text>{note.title}</Text>
@@ -150,7 +149,7 @@ const Home = ({navigation}: NativeStackScreenProps<RoutesStackParamList>) => {
                       Delete
                     </Button>
                   </View>
-                  {note.description && <Text>{note.description}</Text>}
+                  {Boolean(note.description) && <Text>{note.description}</Text>}
                 </View>
               )
             })}

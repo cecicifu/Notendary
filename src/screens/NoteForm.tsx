@@ -1,8 +1,8 @@
 import {FIELD_ERRORS} from '../utils/constants'
-import {saveNote} from '../services/notes.service'
 import {globalStyles} from '../styles/global'
-import {Text, Button, Input} from '@rneui/themed'
+import {saveNote} from '../services/notes.service'
 import {StyleSheet, TextInput, View} from 'react-native'
+import {Text, Button, Input} from '@rneui/themed'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import React, {createRef, useState} from 'react'
 import type {NativeStackScreenProps} from '@react-navigation/native-stack'
@@ -56,9 +56,9 @@ const NoteForm = ({
       updatedAt: new Date().toISOString(),
     }
 
-    await saveNote(note)
+    saveNote(note)
 
-    return navigation.goBack()
+    navigation.goBack()
   }
 
   return (
@@ -120,7 +120,7 @@ const NoteForm = ({
   )
 }
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   buttonsInline: {
     display: 'flex',
     flexDirection: 'row',
