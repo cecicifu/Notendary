@@ -1,9 +1,8 @@
 import {FIELD_ERRORS} from '../utils/constants'
-import {Note} from '../models/Note'
+import {globalStyles} from '../styles/global'
 import {saveNote} from '../services/notes.service'
-import {styles} from '../styles/global'
+import {StyleSheet, TextInput, View} from 'react-native'
 import {Text, Button, Input} from '@rneui/themed'
-import {TextInput, View} from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import React, {createRef, useState} from 'react'
 import type {NativeStackScreenProps} from '@react-navigation/native-stack'
@@ -49,21 +48,21 @@ const NoteForm = ({
   const handleSave = async () => {
     if (!form.title || !form.date) return setError(FIELD_ERRORS.FIELD_MANDATORY)
 
-    const note: Note = {
-      title: form.date,
+    const note = {
+      title: form.title,
       description: form.description,
       datetime: new Date(form.date).toISOString(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
 
-    await saveNote(note)
+    saveNote(note)
 
-    return navigation.goBack()
+    navigation.goBack()
   }
 
   return (
-    <View style={styles.defaultView}>
+    <View style={globalStyles.defaultView}>
       <Text
         h3
         h3Style={{fontFamily: 'sans-serif-thin'}}
@@ -88,13 +87,17 @@ const NoteForm = ({
         onFocus={() => showDatePicker()}
         value={form.date}
         showSoftInputOnFocus={false}
-        rightIcon={{name: 'calendar-today', color: '#000'}}
+        rightIcon={{
+          name: 'calendar-today',
+          color: '#000',
+          onPress: () => setDatePickerVisibility(true),
+        }}
       />
       <View style={styles.buttonsInline}>
         <Button
           icon={{name: 'save', color: '#fff'}}
           title="Save"
-          color="#83AF9B"
+          color="#72B896"
           size="lg"
           onPress={() => handleSave()}
         />
@@ -116,5 +119,14 @@ const NoteForm = ({
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  buttonsInline: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 24,
+  },
+})
 
 export default NoteForm
