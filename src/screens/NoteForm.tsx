@@ -1,3 +1,4 @@
+import {toIsoString} from '../utils/helpers'
 import {FIELD_ERRORS} from '../utils/constants'
 import {globalStyles} from '../styles/global'
 import {saveNote} from '../services/notes.service'
@@ -51,7 +52,7 @@ const NoteForm = ({
     const note = {
       title: form.title,
       description: form.description,
-      datetime: new Date(form.date).toISOString(),
+      datetime: toIsoString(new Date(form.date)),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
