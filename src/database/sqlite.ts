@@ -8,7 +8,7 @@ enablePromise(true)
 
 export const DBConnection = async () =>
   openDatabase({
-    name: 'notendary-data.db',
+    name: 'notendary-data',
     location: 'default',
   })
 
